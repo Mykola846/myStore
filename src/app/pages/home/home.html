@@ -6,10 +6,24 @@
         <div class="flex items-center">
           <h1 class="text-3xl font-bold text-gray-900">PlayStore</h1>
         </div>
-        <nav class="hidden md:flex space-x-8">
+        <nav class="hidden md:flex space-x-8 items-center">
           <a href="/home" class="text-gray-700 hover:text-blue-600 font-medium">Главная</a>
           <a href="/products" class="text-gray-700 hover:text-blue-600 font-medium">Товары</a>
-          <a href="/login" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Войти</a>
+          
+          @if (user$ | async; as user) {
+            <div class="flex items-center space-x-4">
+              <span class="text-gray-700">Привет, {{ user?.displayName || user?.email }}!</span>
+              <button
+                (click)="logout()"
+                class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
+                Выйти
+              </button>
+            </div>
+          } @else {
+            <a href="/login" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+              Войти
+            </a>
+          }
         </nav>
       </div>
     </div>
